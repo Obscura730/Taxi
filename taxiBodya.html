@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Такси «Вадим и Богдан»</title>
+    <style>
+        :root {
+            --primary: #FFCC00;
+            --dark: #121212;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--dark);
+            color: var(--primary);
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #fff;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #DDD;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .team-member {
+            background: #F1F3F5;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .team-member h3 {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .team-member p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .car-photo {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .info-badge {
+            background: #FFF;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            border: 1px solid #E2E8F0;
+        }
+
+        .phone-link {
+            display: inline-block;
+            color: #0066CC;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        #result {
+            margin-top: 15px;
+            padding: 12px;
+            background: #E6F4EA;
+            color: #137333;
+            border-radius: 8px;
+            display: none;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🚕 Такси «Вадим и Богдан»</h1>
+        <p>Быстро, комфортно, надежно</p>
+    </header>
+
+    <div class="container">
+        <!-- Блок заказа -->
+        <div class="card">
+            <h2>Заказать поездку</h2>
+            <div class="form-group">
+                <label>Откуда забрать:</label>
+                <input type="text" id="from" placeholder="Например: ул. Ленина, 5">
+            </div>
+            <div class="form-group">
+                <label>Куда едем:</label>
+                <input type="text" id="to" placeholder="Например: Вокзал">
+            </div>
+            <button class="btn" onclick="makeOrder()">Вызвать такси</button>
+            <div id="result">Заказ принят! Бодя уже выезжает на своей легендарной машине! 🚗💨</div>
+        </div>
+
+        <!-- Команда и данные -->
+        <div class="card">
+            <h2>Наша команда и автопарк</h2>
+            <div class="team-grid">
+                
+                <!-- Менеджер -->
+                <div class="team-member">
+                    <div class="team-header">
+                        <div>
+                            <h3>Отмахов Вадим Дмитриевич</h3>
+                            <p>Главный менеджер</p>
+                        </div>
+                    </div>
+                    <a href="tel:+79940959963" class="phone-link">📞 +7 (994) 095-99-63</a>
+                </div>
+
+                <!-- Таксист Богдан -->
+                <div class="team-member">
+                    <div class="team-header">
+                        <!-- Фото Богдана из вашего сообщения -->
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" alt="Бодя" class="avatar">
+                        <div>
+                            <h3>Бединин Богдан Сергеевич (Бодя!)</h3>
+                            <p>Главный водитель</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-badge">
+                        📅 <strong>Дата регистрации:</strong> 29.12.2011
+                    </div>
+
+                    <!-- Фото машины из загруженных изображений -->
+                    <div>
+                        <p style="margin-bottom: 5px; font-size: 13px; font-weight: bold;">Рабочий автомобиль:</p>
+                        <img src="data:image/jpeg;base64,..." alt="Машина такси" class="car-photo" id="carImg">
+                    </div>
+
+                    <a href="tel:+79775034500" class="phone-link">📞 +7 (977) 503-45-00</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Заменяем заглушку машины на реальное фото, загруженное вами
+        // (Здесь используется одна из загруженных вами фотографий автомобиля)
+        document.getElementById('carImg').src = '1000003307.jpg';
+
+        function makeOrder() {
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const resultBox = document.getElementById('result');
+
+            if(from.trim() === '' || to.trim() === '') {
+                alert('Пожалуйста, заполните пункты отправления и назначения!');
+                return;
+            }
+
+            resultBox.style.display = 'block';
+            setTimeout(() => {
+                resultBox.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
